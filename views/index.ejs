@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+</head>
+<body>
+    <h1>Employee Records</h1>
+    <a href="/employees/new">Add New Employee</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(employee => { %>
+                <tr>
+                    <td><%= employee.title %></td>
+                    <td><%= employee.description %></td>
+                    <td><img src="<%= employee.image %>" alt="Employee Image" width="50"></td>
+                    <td><%= employee.price %></td>
+                    <td><%= employee.rating %></td>
+                    <td>
+                        <a href="/employees/<%= employee._id %>/edit">Edit</a>
+                        <form action="/employees/<%= employee._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div>
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="/employees?page=<%= i %>"><%= i %></a>
+        <% } %>
+    </div>
+</body>
+</html>
